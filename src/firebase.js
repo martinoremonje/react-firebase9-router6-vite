@@ -2,15 +2,13 @@
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 
-
-
 const firebaseConfig = {
-  apiKey: "AIzaSyD_53c3O68Vj0it-58l_P4qMZeRd4HMOqY",
-  authDomain: "react-udemy-firebase-8652e.firebaseapp.com",
-  projectId: "react-udemy-firebase-8652e",
-  storageBucket: "react-udemy-firebase-8652e.firebasestorage.app",
-  messagingSenderId: "784569204381",
-  appId: "1:784569204381:web:61341634ab94a376cf9e74"
+  apiKey: import.meta.env.VITE_API_KEY,
+  authDomain: import.meta.env.VITE_AUTH_DOMAIN,
+  projectId: import.meta.env.VITE_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_MESSAGING_SENDER_ID,
+  appId: import.meta.env.VITE_APP_ID
 };
 
 
