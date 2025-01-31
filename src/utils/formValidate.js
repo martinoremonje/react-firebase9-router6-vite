@@ -6,14 +6,16 @@ return {
       value: /[a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,15})/,
       message: "Formato de email no valido"},
     
-      minLength:{value:6, message:"Minimo 6 caracteres"},
+      minLength(length){
+        return {value:length, message:"Minimo 6 caracteres"}
+      },
       validateTrim: {trim: v => {
         if(!v.trim()) return "No seas payaso ♠"
         return true}
       },
-      validateEquals(getValues){
+      validateEquals(value){
         return {
-            equals: (v) => v === getValues("password") || "No coinciden las contraseñas",
+            equals: (v) => v === value || "No coinciden las contraseñas",
         }
         
       }

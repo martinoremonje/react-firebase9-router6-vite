@@ -7,6 +7,8 @@ import { erroresFirebase } from "../utils/erroresFirebase";
 import { formValidate } from "../utils/formValidate";
 import FormError from "../components/FormError";
 import FormInput from "../components/FormImput";
+import TitleForm from "../components/TitleForm";
+import FormButton from "../components/FormButton";
 
 const Register = () => {
 
@@ -24,8 +26,9 @@ const Register = () => {
         console.log("Accion exitosa... redirigiendo");
         navigate("/");
        } catch (error) {
-        setError("firebase", {
-          message: erroresFirebase(error.code)
+        const {code, message} = erroresFirebase(error.code)
+        setError(code, {
+          message
         })
        }
     }
@@ -35,22 +38,23 @@ const Register = () => {
   
     return (
       <>
-          <h1>Register</h1>
-          <FormError error={errors.firebase}/>
+          <TitleForm title="Register"/>
           <form onSubmit={handleSubmit(onSubmit)}>
             <FormInput
-            type="email" placeholder="Ingrese email" {...register("email", {
+            type="email" placeholder="Ingrese email" error={errors.email} label="Ingresa tu correo" {...register("email", {
               required,
+              
               pattern: patternEmail
-              }          
+              }
+                        
               )}
             ></FormInput>
             
             <FormError error={errors.email}/>
 
             <FormInput
-              type="password" placeholder="Ingrese password" {...register("password", {
-                minLength,
+              type="password" error={errors.password} placeholder="Ingrese password" label="Ingresa password" {...register("password", {
+                minLength: minLength(6),
                 validate: validateTrim                       
                 }
                 )}
@@ -59,12 +63,12 @@ const Register = () => {
             <FormError error={errors.password}/>
 
             <FormInput 
-            type="password" placeholder="Ingrese repassword" {...register("repassword", {
-              validate: validateEquals(getValues)
+            type="password" error={errors.repassword} placeholder="Ingrese repassword" label="Ingresa nuevamente la password" {...register("repassword", {
+              validate: validateEquals(getValues("password"))
             })}
             ></FormInput>
             <FormError error={errors.repassword}/>
-            <button type="submit">Registrarse</button>
+            <FormButton text="Register" />
           </form>
       </>
     )

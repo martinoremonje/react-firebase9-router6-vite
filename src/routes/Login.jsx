@@ -6,6 +6,8 @@ import { erroresFirebase } from "../utils/erroresFirebase";
 import FormError from "../components/FormError";
 import FormInput from "../components/FormImput";
 import { formValidate } from "../utils/formValidate";
+import TitleForm from "../components/TitleForm";
+import FormButton from "../components/FormButton";
 
 const Login = () => {
      
@@ -21,20 +23,19 @@ const onSubmit = async ({email, password}) => {
         console.log("Accion exitosa... redirigiendo");
         navigate("/");
        } catch (error) {
-        console.log(error.code)
-            setError("firebase", {
-              message: erroresFirebase(error.code)
-            })
+        const {code, message} = erroresFirebase(error.code)
+        setError(code, {
+          message
+        })
        }
     }
 
     return (
       <>
-          <h1>Login</h1>
-            <FormError error={errors.firebase}/>
+          <TitleForm title="Login" />
             <form onSubmit={handleSubmit(onSubmit)}>
             <FormInput
-            type="email" placeholder="Ingrese email" {...register("email", {
+            type="email" error={errors.email} placeholder="Ingrese email" label="Ingresa Email" {...register("email", {
               required,
               pattern: patternEmail
               }          
@@ -44,7 +45,7 @@ const onSubmit = async ({email, password}) => {
             <FormError error={errors.email}/>
 
             <FormInput
-              type="password" placeholder="Ingrese password" {...register("password", {
+              type="password" error={errors.password} placeholder="Ingrese password" label="Ingresa Password" {...register("password", {
                 minLength,
                 validate: validateTrim                       
                 }
@@ -52,7 +53,7 @@ const onSubmit = async ({email, password}) => {
             ></FormInput>
 
             <FormError error={errors.password}/>
-            <button type="submit">Ingresar</button>
+            <FormButton text="Ingresar"/>
           </form>
             
       </>
