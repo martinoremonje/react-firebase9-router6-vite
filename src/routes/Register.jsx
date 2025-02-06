@@ -9,11 +9,12 @@ import FormError from "../components/FormError";
 import FormInput from "../components/FormImput";
 import TitleForm from "../components/TitleForm";
 import FormButton from "../components/FormButton";
+import ButtonLoading from "../components/ButtongLoading";
 
 const Register = () => {
 
  
-    const {registerUser} = useContext(UserContext);
+    const {registerUser, loading, setLoading} = useContext(UserContext);
     const {required, patternEmail, minLength, validateTrim,validateEquals} = formValidate()
     const navigate = useNavigate()
 
@@ -22,6 +23,7 @@ const Register = () => {
 
     const onSubmit = async ({email, password}) => {
        try {
+        setLoading(true)
         await registerUser(email,password);
         console.log("Accion exitosa... redirigiendo");
         navigate("/");
@@ -30,6 +32,9 @@ const Register = () => {
         setError(code, {
           message
         })
+       }
+       finally{
+        setLoading(false)
        }
     }
 
@@ -68,7 +73,9 @@ const Register = () => {
             })}
             ></FormInput>
             <FormError error={errors.repassword}/>
-            <FormButton text="Register" />
+            {
+              loading ? <ButtonLoading /> : <FormButton text="Register" />
+            }
           </form>
       </>
     )

@@ -9,11 +9,12 @@ export const UserContext = createContext()
 
 const UserProvider = ({children}) => { 
 
-    const [user,setUser] = useState(false)
+    const [user,setUser] = useState(false);
+    const [loading, setLoading] = useState(false)
 
     useEffect(()=>{
         const unsuscribe = onAuthStateChanged(auth, user =>{
-            console.log(user)
+           
             if(user){
                 const {email, photoURL, displayName, uid} = user
                 setUser({email, photoURL, displayName, uid})
@@ -33,7 +34,7 @@ const UserProvider = ({children}) => {
      
     
     return (
-        <UserContext.Provider value={{user,setUser, registerUser, loginUser,signOutUser}}>
+        <UserContext.Provider value={{user,setUser, registerUser, loginUser,signOutUser,loading, setLoading}}>
             {children}
         </UserContext.Provider>
     )

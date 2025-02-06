@@ -1,4 +1,4 @@
-import { useContext} from "react"
+import { useContext, useState} from "react"
 import { UserContext } from "../context/UserProvider"
 import { useNavigate } from "react-router-dom"
 import { useForm } from "react-hook-form";
@@ -8,17 +8,20 @@ import FormInput from "../components/FormImput";
 import { formValidate } from "../utils/formValidate";
 import TitleForm from "../components/TitleForm";
 import FormButton from "../components/FormButton";
+import ButtonLoading from "../components/ButtongLoading";
 
 const Login = () => {
      
-    const {loginUser} = useContext(UserContext)
-    const navigate = useNavigate()
+    const {loginUser,loading, setLoading} = useContext(UserContext)
+    const navigate = useNavigate();
+    
 
     const {register, handleSubmit, formState: {errors}, setError} = useForm();
     const {required, patternEmail, minLength, validateTrim} = formValidate()
    
 const onSubmit = async ({email, password}) => {
        try {
+        setLoading(true)
         await loginUser(email,password);
         console.log("Accion exitosa... redirigiendo");
         navigate("/");
@@ -27,6 +30,8 @@ const onSubmit = async ({email, password}) => {
         setError(code, {
           message
         })
+       }finally{
+        setLoading(false)
        }
     }
 
@@ -53,7 +58,10 @@ const onSubmit = async ({email, password}) => {
             ></FormInput>
 
             <FormError error={errors.password}/>
-            <FormButton text="Ingresar"/>
+            {
+              loading ? <ButtonLoading /> :  <FormButton text="Ingresar"/>
+            }
+           
           </form>
             
       </>
