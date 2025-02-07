@@ -5,6 +5,9 @@ return {
     patternEmail: {
       value: /[a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,15})/,
       message: "Formato de email no valido"},
+      patternUrl: {
+        value: /\bhttps?:\/\/(?:www\.)?[-\w+&@#/%=~_|!:,.;]*[-\w+&@#/%=~_|]/,
+        message: "Formato de URL no valido"},
     
       minLength(length){
         return {value:length, message:"Minimo 6 caracteres"}

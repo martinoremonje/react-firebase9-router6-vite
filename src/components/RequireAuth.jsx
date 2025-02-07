@@ -11,7 +11,7 @@ const RequireAuth = () => {
     }
 
     return (
-        <div className="container mx-auto">
+        <div className="w-150 mx-auto mt-10">
             <Outlet />
         </div>
     )

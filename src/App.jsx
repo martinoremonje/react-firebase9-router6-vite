@@ -11,6 +11,7 @@ import { UserContext } from "./context/UserProvider"
 import LayoutContainerForm from "./components/LayoutContainerForm"
 import NotFound from "./routes/NotFound"
 import Loading from "./components/ButtonLoading"
+import LayoutRedirect from "./components/LayoutRedirect"
 
 const App = ()=> {
  
@@ -23,6 +24,7 @@ const App = ()=> {
 
   return (
     <>
+    <div className="no-select">
     <NavBar/>
     <Routes>
       
@@ -39,8 +41,13 @@ const App = ()=> {
           <Route path="/login" element={<Login />}/>
           <Route path="/register" element={<Register />}/>
       </Route>
-      <Route path="*" element={<NotFound/>}/>
+
+      <Route path="/:nanoid" element={<LayoutRedirect/>}>
+
+      <Route index element={<NotFound/>}/>
+      </Route>
     </Routes>
+    </div>
     </>
   )
 }

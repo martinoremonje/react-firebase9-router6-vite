@@ -1,5 +1,5 @@
 import { db } from "../firebase.js";
-import { setDoc, collection, doc, getDocs, query, where, deleteDoc, updateDoc } from "firebase/firestore"; 
+import { setDoc, collection, doc, getDocs, query, where, deleteDoc, updateDoc, getDoc } from "firebase/firestore"; 
 import { useContext, useState } from "react";
 import { UserContext } from "../context/UserProvider.jsx";
 import { nanoid } from "nanoid";
@@ -83,10 +83,20 @@ const useFirestore = () => {
         }
     }
 
+        const searchData = async(nanoid) =>{
+            try {
+                const docRef = doc(db, "urls", nanoid);
+                const docSnap = await getDoc(docRef);
+
+                return docSnap
+            } catch (error) {
+                setError(error.message)
+            }
+        }
 
 
     return {
-        data, error, loading, getData, addData, deleteData, updateData
+        data, error, loading, getData, addData, deleteData, updateData, searchData
     }
  };
 
