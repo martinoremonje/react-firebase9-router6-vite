@@ -1,8 +1,14 @@
-# React + Vite
+# URL Short & Save
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Esta es una aplicación de acortamiento de URL creada con React y Firebase. Permite a los usuarios ingresar una URL larga y obtener una versión más corta y manejable.
 
-Currently, two official plugins are available:
+## Tecnologías Utilizadas
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **React**: Biblioteca de JavaScript para la construcción de interfaces de usuario.
+- **Firebase**: Plataforma de desarrollo de aplicaciones que proporciona backend y servicios de autenticación.
+- **Formik**: Biblioteca para la gestión de formularios en React.
+- **nanoid**: Biblioteca para generar identificadores únicos y cortos.
+- **Tailwind CSS**: Framework de CSS para diseñar de forma rápida y eficiente.
+- **Flowbite**: Biblioteca de componentes UI basada en Tailwind CSS.
+
+
